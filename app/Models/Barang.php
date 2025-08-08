@@ -14,8 +14,8 @@ class Barang extends Model
         'nama_barang',
         'harga',
         'stok',
-        'id_user_kantin',
         'gambar',
+        'id_user_kantin',
     ];
 
     // Relasi dengan User (Kantin)

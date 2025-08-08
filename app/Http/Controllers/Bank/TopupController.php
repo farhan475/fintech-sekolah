@@ -23,6 +23,7 @@ class TopupController extends Controller
         if ($request->filled('nisn')) {
             // Eager load relasi 'user' untuk menampilkan nama di view
             $siswa = Siswa::with('user')->where('nisn', $request->nisn)->first();
+            // dd($siswa);
         }
         return view('bank.topup.create', compact('siswa'));
     }

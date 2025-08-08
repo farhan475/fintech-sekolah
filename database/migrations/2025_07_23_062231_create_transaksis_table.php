@@ -16,9 +16,8 @@ return new class extends Migration
             $table->integer('jumlah_barang');
             $table->decimal('total_harga', 12, 2);
             $table->date('tanggal');
-            $table->unsignedBigInteger('id_barang');
-            $table->foreignId('id_siswa')->constrained('siswas')->onDelete('cascade');
-            $table->foreign('id_barang')->references('id_barang')->on('barangs')->onDelete('cascade');
+            $table->foreignId('id_siswa')->constrained('siswas', 'id_siswa')->onDelete('cascade');
+            $table->foreignId('id_barang')->constrained('barangs', 'id_barang')->onDelete('cascade');
             $table->foreignId('id_user_kantin')->constrained('users', 'id_user')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

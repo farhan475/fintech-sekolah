@@ -36,5 +36,12 @@ class AdminUserSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'kantin',
         ]);
+
+        User::create([
+            'nama' => 'farhan',
+            'email' => 'farhan@fintech.com',
+            'password' => Hash::make('password'),
+            'role' => 'siswa',
+        ]);
     }
 }

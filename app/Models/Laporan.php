@@ -12,7 +12,7 @@ class Laporan extends Model
 
     protected $table = 'laporans';
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_laporan';
     protected $fillable = [
         'tanggal',
         'jenis_transaksi',

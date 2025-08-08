@@ -55,8 +55,8 @@
             @csrf
             
             {{-- PERBAIKAN PENTING: Pastikan input ini ada di dalam form yang benar --}}
-            <input type="hidden" name="id_siswa" value="{{ $siswa->id_siswa }}">
-            
+            <input type="hidden" name="id_siswa" value="{{ $siswa->id_siswa}}">
+
             {{-- Input untuk jumlah top-up --}}
             
             <div class="mb-4">

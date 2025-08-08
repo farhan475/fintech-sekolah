@@ -12,13 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_siswa');
             $table->string('nisn')->unique();
             $table->string('kelas');
             $table->decimal('saldo',12, 2)->default(0);
             $table->foreignId('id_user')->constrained('users', 'id_user')->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

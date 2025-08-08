@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->decimal('jumlah', 12, 2);
             $table->date('tanggal');
-            $table->unsignedBigInteger('id_siswa');
-            $table->foreign('id_siswa')->references('id')->on('siswas')->onDelete('cascade');
-            $table->unsignedBigInteger('id_user_bank');
-            $table->foreign('id_user_bank')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreignId('id_siswa')->constrained('siswas', 'id_siswa')->onDelete('cascade');
+            $table->foreignId('id_user_bank')->constrained('users', 'id_user')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
