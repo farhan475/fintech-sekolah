@@ -5,7 +5,6 @@
 @section('content')
     <h1 class="text-3xl font-bold text-gray-800 mb-6">Laporan Transaksi</h1>
 
-    <!-- Filter Tanggal -->
     <div class="bg-white shadow-md rounded-lg p-4 mb-6">
         <form action="{{ route('bank.laporan.index') }}" method="GET" class="flex items-center space-x-4">
             <label for="tanggal" class="font-semibold text-gray-700">Pilih Tanggal Laporan:</label>
@@ -16,7 +15,6 @@
         </form>
     </div>
 
-    <!-- Ringkasan/Summary Cards -->
     <div class="mb-8">
         <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ringkasan untuk Tanggal: {{ \Carbon\Carbon::parse($selectedDate)->format('d F Y') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -35,7 +33,6 @@
         </div>
     </div>
 
-    <!-- Tabel Rincian Transaksi Gabungan -->
     <div class="bg-white shadow-md rounded-lg overflow-x-auto">
         <table class="min-w-full leading-normal">
             <thead class="bg-gray-50">
@@ -50,7 +47,6 @@
                     <tr>
                         <td class="px-5 py-4 border-b border-gray-200">{{ $item->nama_siswa }}</td>
                         <td class="px-5 py-4 border-b border-gray-200">
-                            {{-- Memberi warna berdasarkan jenis transaksi --}}
                             @if($item->status == 'masuk')
                                 <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full text-sm">
                                     {{ $item->jenis }}
@@ -62,7 +58,6 @@
                             @endif
                         </td>
                         <td class="px-5 py-4 border-b border-gray-200 text-right font-semibold">
-                            {{-- Memberi warna pada jumlah --}}
                             @if($item->status == 'masuk')
                                 <span class="text-green-600">+ Rp {{ number_format($item->jumlah, 0, ',', '.') }}</span>
                             @else

@@ -15,9 +15,6 @@ use Throwable;
 
 class TransaksiController extends Controller
 {
-    /**
-     * Menampilkan halaman utama untuk membuat transaksi.
-     */
     public function create(Request $request)
     {
         $siswa = null;
@@ -32,20 +29,15 @@ class TransaksiController extends Controller
         return view('kantin.transaksi.create', compact('siswa', 'barangs'));
     }
 
-    /**
-     * Memproses dan menyimpan transaksi penjualan.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'id_siswa' => 'required|exists:siswas,id_siswa',
-            // Pastikan 'items' ada dan merupakan array
             'items' => 'present|nullable|array',
             'items.*.id_barang' => 'required|exists:barangs,id_barang',
             'items.*.jumlah' => 'required|integer|min:1',
         ]);
 
-        // Filter item yang jumlahnya 0 atau tidak diisi
         $items = array_filter($validated['items'] ?? [], function ($item) {
             return !empty($item['jumlah']) && $item['jumlah'] > 0;
         });
@@ -61,7 +53,6 @@ class TransaksiController extends Controller
                 $totalBelanja = 0;
 
                 foreach ($items as $itemData) {
-                    // Kunci barang untuk mencegah race condition (mengunci baris di database)
                     $barang = Barang::where('id_barang', $itemData['id_barang'])->lockForUpdate()->first();
                     $jumlahBeli = $itemData['jumlah'];
                     
@@ -75,11 +66,9 @@ class TransaksiController extends Controller
                     $subtotal = $barang->harga * $jumlahBeli;
                     $totalBelanja += $subtotal;
 
-                    // Kurangi stok barang
                     $barang->stok -= $jumlahBeli;
                     $barang->save();
 
-                    // Catat di tabel 'transaksis'
                     Transaksi::create([
                         'jumlah_barang' => $jumlahBeli,
                         'total_harga' => $subtotal,
@@ -94,11 +83,9 @@ class TransaksiController extends Controller
                     throw new \Exception("Saldo siswa tidak mencukupi. Total belanja: Rp " . number_format($totalBelanja));
                 }
 
-                // Kurangi saldo siswa
                 $siswa->saldo -= $totalBelanja;
                 $siswa->save();
 
-                // Catat di tabel 'laporans'
                 Laporan::create([
                     'tanggal' => Carbon::today(),
                     'jenis_transaksi' => 'transaksi',
@@ -107,7 +94,6 @@ class TransaksiController extends Controller
                 ]);
             });
         } catch (\Throwable $e) {
-            // Jika ada error apa pun, tampilkan pesannya dengan jelas
             return back()->with('error', 'Transaksi Gagal: ' . $e->getMessage())->withInput();
         }
 

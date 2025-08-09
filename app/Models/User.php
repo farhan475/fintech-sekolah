@@ -49,7 +49,6 @@ class User extends Authenticatable
         ];
     }
 
-    // app/Models/User.php
     public function siswa()
     {
         return $this->hasOne(Siswa::class, 'id_user', 'id_user');

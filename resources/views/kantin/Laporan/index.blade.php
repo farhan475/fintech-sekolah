@@ -5,7 +5,6 @@
 @section('content')
 <h1 class="text-3xl font-bold text-gray-800 mb-6">Laporan Penjualan Harian</h1>
 
-<!-- Filter Tanggal -->
 <div class="bg-white shadow-md rounded-lg p-4 mb-6">
     <form action="{{ route('kantin.laporan.index') }}" method="GET" class="flex items-center space-x-4">
         <label for="tanggal" class="font-semibold text-gray-700">Pilih Tanggal Laporan:</label>
@@ -16,7 +15,6 @@
     </form>
 </div>
 
-<!-- Ringkasan/Summary Cards -->
 <div class="mb-8">
     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ringkasan untuk Tanggal: {{ \Carbon\Carbon::parse($selectedDate)->format('d F Y') }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -35,7 +33,6 @@
     </div>
 </div>
 
-<!-- Tabel Rincian Transaksi -->
 <div class="bg-white shadow-md rounded-lg overflow-x-auto">
     <table class="min-w-full leading-normal">
         <thead class="bg-gray-50">

@@ -17,11 +17,10 @@ class AdminUserSeeder extends Seeder
         User::create([
             'nama' => 'Administrator',
             'email' => 'admin@fintech.com',
-            'password' => Hash::make('password'), // Gunakan password yang kuat di produksi
+            'password' => Hash::make('password'), 
             'role' => 'administrator',
         ]);
 
-        // Contoh user Bank
         User::create([
             'nama' => 'Bank Sekolah A',
             'email' => 'bank@fintech.com',
@@ -29,7 +28,6 @@ class AdminUserSeeder extends Seeder
             'role' => 'bank',
         ]);
 
-        // Contoh user Kantin
         User::create([
             'nama' => 'Kantin Jaya',
             'email' => 'kantin@fintech.com',

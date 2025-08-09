@@ -5,13 +5,11 @@
 @section('content')
 <h1 class="text-3xl font-bold text-gray-800 mb-6">Form Top-up Saldo Siswa</h1>
 
-{{-- Notifikasi untuk sukses atau error --}}
 @if (session('success'))
     <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
         <p>{{ session('success') }}</p>
     </div>
 @endif
-{{-- Tampilkan juga error validasi --}}
 @if ($errors->any())
     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
         <p class="font-bold">Terjadi Kesalahan Validasi</p>
@@ -23,7 +21,6 @@
     </div>
 @endif
 
-<!-- Form Pencarian Siswa -->
 <div class="bg-white shadow-md rounded-lg p-6 mb-6">
     <form action="{{ route('bank.topup.create') }}" method="GET">
         <label for="nisn" class="block text-sm font-medium text-gray-700 mb-2">Cari Siswa Berdasarkan NISN:</label>
@@ -35,10 +32,6 @@
         </div>
     </form>
 </div>
-
-{{-- ========================================================================= --}}
-{{-- BAGIAN INI HANYA AKAN TAMPIL JIKA SISWA DITEMUKAN SETELAH PENCARIAN --}}
-{{-- ========================================================================= --}}
 @if(isset($siswa) && $siswa)
     <div class="bg-white shadow-md rounded-lg p-6">
         <h2 class="text-2xl font-semibold mb-4">Detail Siswa</h2>
@@ -50,14 +43,11 @@
         </div>
         <hr class="my-4">
         
-        {{-- Form Top-up yang sesungguhnya --}}
         <form action="{{ route('bank.topup.store') }}" method="POST">
             @csrf
             
-            {{-- PERBAIKAN PENTING: Pastikan input ini ada di dalam form yang benar --}}
             <input type="hidden" name="id_siswa" value="{{ $siswa->id_siswa}}">
 
-            {{-- Input untuk jumlah top-up --}}
             
             <div class="mb-4">
                 <label for="jumlah" class="block text-sm font-medium text-gray-700 mb-2">Jumlah Top-up:</label>
@@ -70,7 +60,6 @@
             </button>
         </form>
     </div>
-{{-- Bagian ini tampil jika ada NISN di URL tapi siswa tidak ditemukan --}}
 @elseif(request()->has('nisn'))
     <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
         <p>Siswa dengan NISN "{{ request('nisn') }}" tidak ditemukan.</p>

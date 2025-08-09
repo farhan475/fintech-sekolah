@@ -1,4 +1,4 @@
-@extends('layouts.bank') {{-- Kita bisa menggunakan layout admin yang sama --}}
+@extends('layouts.bank') 
 
 @section('content')
 <h1 class="text-3xl font-bold text-gray-800 mb-6">Dashboard Bank Mini</h1>
@@ -6,7 +6,6 @@
 <p class="text-gray-600 mb-8">Selamat datang, {{ Auth::user()->nama }}. Silakan pilih menu di bawah untuk memulai.</p>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Menu Top Up -->
     <a href="{{ route('bank.topup.create') }}" class="block bg-white rounded-lg shadow-md p-6 hover:bg-gray-50 transition">
         <div class="flex items-center">
             <i class="fas fa-wallet text-4xl text-green-500"></i>
@@ -17,7 +16,6 @@
         </div>
     </a>
 
-    <!-- Menu Tarik Tunai -->
     <a href="{{ route('bank.withdrawal.create') }}" class="block bg-white rounded-lg shadow-md p-6 hover:bg-gray-50 transition">
         <div class="flex items-center">
             <i class="fas fa-money-bill-wave text-4xl text-blue-500"></i>
@@ -28,7 +26,6 @@
         </div>
     </a>
 
-    <!-- Menu Laporan -->
     <a href="{{ route('bank.laporan.index') }}" class="block bg-white rounded-lg shadow-md p-6 hover:bg-gray-50 transition">
         <div class="flex items-center">
             <i class="fas fa-chart-line text-4xl text-yellow-500"></i>

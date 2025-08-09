@@ -25,7 +25,6 @@
             <tbody>
                 @forelse ($barangs as $barang)
                 <tr>
-                    {{-- Kolom Gambar --}}
                     <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">
                         @if($barang->gambar)
                             <img src="{{ asset('storage/' . $barang->gambar) }}" alt="{{ $barang->nama_barang }}" class="w-16 h-16 object-cover rounded">
@@ -35,26 +34,19 @@
                             </div>
                         @endif
                     </td>
-                    {{-- Kolom Nama Barang --}}
                     <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">
                         {{ $barang->nama_barang }}
                     </td>
                     
-                    {{-- ===================================================================== --}}
-                    {{-- INI ADALAH BAGIAN YANG SEBELUMNYA HILANG DAN SEKARANG DIPERBAIKI --}}
-                    {{-- ===================================================================== --}}
                     
-                    {{-- Kolom Harga --}}
                     <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">
                         Rp {{ number_format($barang->harga, 0, ',', '.') }}
                     </td>
 
-                    {{-- Kolom Stok --}}
                     <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">
                         {{ $barang->stok }}
                     </td>
 
-                    {{-- Kolom Aksi --}}
                     <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm text-center">
                         <a href="{{ route('kantin.barang.edit', $barang) }}" class="text-yellow-600 hover:text-yellow-900 font-semibold mr-3">Edit</a>
                         <form action="{{ route('kantin.barang.destroy', $barang) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">

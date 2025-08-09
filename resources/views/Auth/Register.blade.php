@@ -48,7 +48,6 @@
                     class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500">
             </div>
 
-            {{-- Field NISN dan Kelas selalu terlihat dan wajib diisi --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label for="nisn" class="block text-sm font-medium text-gray-700">NISN</label>

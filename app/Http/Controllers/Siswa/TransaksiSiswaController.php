@@ -18,7 +18,6 @@ class TransaksiSiswaController extends Controller
         $user = Auth::user();
         $siswa = $user->siswa;
 
-        // --- Validasi Keamanan & Bisnis ---
         if ($barang->stok < 1) {
             return back()->with('error', 'Transaksi Gagal: Stok barang sudah habis!');
         }
@@ -28,15 +27,12 @@ class TransaksiSiswaController extends Controller
 
         try {
             DB::transaction(function () use ($siswa, $barang) {
-                // 1. Kurangi saldo siswa
                 $siswa->saldo -= $barang->harga;
                 $siswa->save();
 
-                // 2. Kurangi stok barang
-                $barang->stok -= 1; // Beli 1 unit
+                $barang->stok -= 1; 
                 $barang->save();
 
-                // 3. Catat di tabel 'transaksis'
                 Transaksi::create([
                     'jumlah_barang' => 1,
                     'total_harga' => $barang->harga,
@@ -46,7 +42,6 @@ class TransaksiSiswaController extends Controller
                     'id_user_kantin' => $barang->id_user_kantin,
                 ]);
 
-                // 4. Catat di tabel 'laporans'
                 Laporan::create([
                     'tanggal' => Carbon::today(),
                     'jenis_transaksi' => 'transaksi',

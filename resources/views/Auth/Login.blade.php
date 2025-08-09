@@ -41,8 +41,6 @@
                     <input type="checkbox" name="remember" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
                     <span class="ml-2 text-gray-600">Remember Me</span>
                 </label>
-                {{-- Optional: Forgot password --}}
-                {{-- <a href="#" class="text-sm text-blue-600 hover:underline">Forgot Password?</a> --}}
             </div>
 
             <div class="mb-4">

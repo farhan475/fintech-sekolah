@@ -18,13 +18,11 @@ class Barang extends Model
         'id_user_kantin',
     ];
 
-    // Relasi dengan User (Kantin)
     public function kantin()
     {
         return $this->belongsTo(User::class, 'id_user_kantin', 'id_user');
     }
 
-    // Relasi dengan Transaksi
     public function transaksi()
     {
         return $this->hasMany(Transaksi::class, 'id_barang', 'id_barang');

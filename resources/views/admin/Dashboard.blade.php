@@ -4,47 +4,38 @@
 <h1 class="text-3xl font-bold text-gray-800 mb-6">Dashboard Admin</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-    <!-- Kartu Total Pengguna -->
     <div class="bg-white rounded-lg shadow-md p-6 flex items-center justify-between">
         <div>
             <p class="text-gray-500 text-sm uppercase font-bold">Total Pengguna</p>
-            {{-- Mengganti data dummy dengan variabel dari controller --}}
             <p class="text-3xl font-bold text-gray-900 mt-1">{{ $totalPengguna }}</p>
         </div>
         <i class="fas fa-users text-4xl text-blue-500"></i>
     </div>
 
-    <!-- Kartu Saldo Terkumpul -->
     <div class="bg-white rounded-lg shadow-md p-6 flex items-center justify-between">
         <div>
             <p class="text-gray-500 text-sm uppercase font-bold">Saldo Terkumpul</p>
-            {{-- Mengganti data dummy dengan variabel yang sudah diformat --}}
             <p class="text-3xl font-bold text-gray-900 mt-1">Rp {{ number_format($totalSaldo, 0, ',', '.') }}</p>
         </div>
         <i class="fas fa-wallet text-4xl text-green-500"></i>
     </div>
 
-    <!-- Kartu Transaksi Hari Ini -->
     <div class="bg-white rounded-lg shadow-md p-6 flex items-center justify-between">
         <div>
             <p class="text-gray-500 text-sm uppercase font-bold">Transaksi Hari Ini</p>
-            {{-- Mengganti data dummy dengan variabel dari controller --}}
             <p class="text-3xl font-bold text-gray-900 mt-1">{{ $transaksiHariIni }}</p>
         </div>
         <i class="fas fa-exchange-alt text-4xl text-yellow-500"></i>
     </div>
 </div>
 
-<!-- Panel Aktivitas Terbaru -->
 <div class="bg-white rounded-lg shadow-md p-6">
     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Aktivitas Terbaru</h2>
     <ul class="list-disc list-inside text-gray-700 space-y-3">
-        {{-- Mengganti list statis dengan loop dinamis dari database --}}
         @forelse ($aktivitasTerbaru as $aktivitas)
             <li>
                 <strong>{{ $aktivitas->user->nama ?? 'Pengguna' }}</strong> 
                 
-                {{-- Menampilkan deskripsi berdasarkan jenis transaksi --}}
                 @if($aktivitas->jenis == 'top-up')
                     melakukan top-up sebesar <strong>Rp {{ number_format($aktivitas->jumlah, 0, ',', '.') }}</strong>
                 @elseif($aktivitas->jenis == 'pembelian')
@@ -55,11 +46,9 @@
                     melakukan transaksi sebesar <strong>Rp {{ number_format($aktivitas->jumlah, 0, ',', '.') }}</strong>
                 @endif
                 
-                {{-- Menggunakan Carbon untuk format waktu yang user-friendly --}}
                 <span class="text-gray-500 text-sm">({{ $aktivitas->created_at->diffForHumans() }})</span>
             </li>
         @empty
-            {{-- Tampil jika tidak ada aktivitas sama sekali --}}
             <li class="list-none">Tidak ada aktivitas terbaru.</li>
         @endforelse
     </ul>

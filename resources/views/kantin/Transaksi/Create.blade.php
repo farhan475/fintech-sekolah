@@ -5,7 +5,6 @@
 @section('content')
 <h1 class="text-3xl font-bold text-gray-800 mb-6">Transaksi Penjualan</h1>
 
-{{-- Notifikasi --}}
 @if (session('success')) <div class="bg-green-100 text-green-700 p-4 rounded mb-4">{{ session('success') }}</div> @endif
 @if (session('error')) <div class="bg-red-100 text-red-700 p-4 rounded mb-4">{{ session('error') }}</div> @endif
 @if ($errors->any())
@@ -17,7 +16,6 @@
     </div>
 @endif
 
-<!-- Form Pencarian Siswa -->
 <div class="bg-white shadow-md rounded-lg p-6 mb-6">
     <form action="{{ route('kantin.transaksi.create') }}" method="GET">
         <label for="nisn" class="block font-medium text-gray-700 mb-2">Cari Siswa (NISN):</label>
@@ -30,7 +28,6 @@
         @csrf
         <input type="hidden" name="id_siswa" value="{{ $siswa->id_siswa }}">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Kolom Daftar Barang -->
             <div class="lg:col-span-2 bg-white shadow-md rounded-lg p-6">
                 <h2 class="text-xl font-semibold mb-4">Pilih Barang</h2>
                 <div class="space-y-4 max-h-96 overflow-y-auto">
@@ -41,9 +38,6 @@
                             <p class="text-sm text-gray-600">Stok: {{ $barang->stok }} | Harga: Rp <span id="harga-{{$barang->id_barang}}">{{ number_format($barang->harga, 0, ',', '.') }}</span></p>
                         </div>
                         <div>
-                            {{-- ======================================================= --}}
-                            {{-- PERBAIKAN UTAMA: Input name diganti sementara --}}
-                            {{-- ======================================================= --}}
                             <input type="number" data-name-jumlah="items[{{ $barang->id_barang }}][jumlah]" data-name-id="items[{{ $barang->id_barang }}][id_barang]" min="0" max="{{$barang->stok}}" data-id-barang="{{$barang->id_barang}}" data-harga="{{$barang->harga}}" placeholder="0" class="w-24 p-2 border rounded-lg text-center item-jumlah">
                             <input type="hidden" value="{{ $barang->id_barang }}">
                         </div>
@@ -53,7 +47,6 @@
                     @endforelse
                 </div>
             </div>
-            <!-- Kolom Ringkasan Belanja -->
             <div class="bg-white shadow-md rounded-lg p-6" id="summary-section">
                 <h2 class="text-xl font-semibold mb-4">Ringkasan</h2>
                 <div class="space-y-2 text-gray-700">
@@ -86,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const saldoAwal = parseFloat(saldoAwalEl.dataset.saldo);
 
     function handleTransaction() {
-        // Hapus input hidden lama jika ada, untuk mencegah duplikasi
         form.querySelectorAll('input[type="hidden"][name^="items"]').forEach(el => el.remove());
 
         let total = 0;
@@ -98,10 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (jumlah > 0) {
                 hasItems = true;
                 total += jumlah * harga;
-
-                // =======================================================
-                // PERBAIKAN UTAMA: Buat input hidden hanya untuk item yang dibeli
-                // =======================================================
                 const hiddenJumlah = document.createElement('input');
                 hiddenJumlah.type = 'hidden';
                 hiddenJumlah.name = input.dataset.nameJumlah;
@@ -137,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('input', handleTransaction);
     });
     
-    // Panggil saat form di-submit untuk memastikan data terbaru yang dikirim
     form.addEventListener('submit', handleTransaction);
 
     handleTransaction();

@@ -2,7 +2,6 @@
 @section('content')
     <h1 class="text-3xl font-bold text-gray-800 mb-6">Edit Barang: {{ $barang->nama_barang }}</h1>
     <div class="bg-white shadow-md rounded-lg p-6">
-        {{-- PERBAIKAN: Menambahkan enctype="multipart/form-data" pada form --}}
         <form action="{{ route('kantin.barang.update', $barang->id_barang) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -20,7 +19,6 @@
             </div>
              <div class="mb-4">
                 <label for="gambar" class="block text-gray-700 font-semibold mb-2">Ganti Gambar (Kosongkan jika tidak diubah)</label>
-                {{-- Menampilkan gambar yang ada saat ini --}}
                 @if($barang->gambar)
                     <img src="{{ asset('storage/' . $barang->gambar) }}" alt="{{ $barang->nama_barang }}" class="w-32 h-32 object-cover rounded-md mb-2 border">
                 @endif

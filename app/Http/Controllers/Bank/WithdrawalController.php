@@ -14,9 +14,6 @@ use Throwable;
 
 class WithdrawalController extends Controller
 {
-    /**
-     * Menampilkan form untuk melakukan penarikan.
-     */
     public function create(Request $request)
     {
         $siswa = null;
@@ -26,9 +23,6 @@ class WithdrawalController extends Controller
         return view('bank.withdrawal.create', compact('siswa'));
     }
 
-    /**
-     * Memproses dan menyimpan data penarikan.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -40,17 +34,13 @@ class WithdrawalController extends Controller
             DB::transaction(function () use ($request) {
                 $siswa = Siswa::with('user')->findOrFail($request->id_siswa);
 
-                // Validasi saldo
                 if ($siswa->saldo < $request->jumlah) {
-                    // throw new \Exception() akan ditangkap oleh blok catch
                     throw new \Exception("Saldo siswa tidak mencukupi.");
                 }
 
-                // 1. Kurangi saldo siswa
                 $siswa->saldo -= $request->jumlah;
                 $siswa->save();
 
-                // 2. Catat di tabel 'withdrawals'
                 Withdrawal::create([
                     'jumlah' => $request->jumlah,
                     'tanggal' => Carbon::today(),
@@ -58,7 +48,6 @@ class WithdrawalController extends Controller
                     'id_user_bank' => Auth::id(),
                 ]);
 
-                // 3. Catat di tabel 'laporans'
                 Laporan::create([
                     'tanggal' => Carbon::today(),
                     'jenis_transaksi' => 'withdrawal',

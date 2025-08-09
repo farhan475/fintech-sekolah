@@ -6,12 +6,10 @@
     <title>Bank Mini | Fintech Sekolah</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- Jika Anda menggunakan Vite, ganti dengan @vite --}}
 </head>
 <body class="bg-gray-100 font-sans flex min-h-screen">
 
     <div class="flex w-full">
-        <!-- Sidebar -->
         <div class="bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col justify-between">
             <div>
                 <div class="text-xl font-bold pb-4 border-b border-gray-700 mb-4">Fintech - Bank Mini</div>
@@ -45,11 +43,9 @@
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col">
             <nav class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
                 <h2 class="text-lg font-semibold">Selamat Datang, {{ Auth::user()->nama }}</h2>
-                {{-- Anda bisa menambahkan menu dropdown user di sini jika perlu --}}
             </nav>
 
             <main class="p-6 flex-1">

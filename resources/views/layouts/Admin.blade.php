@@ -8,9 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     @vite('resources/css/app.css')
     <style>
-        /* Custom styles if needed, though Tailwind aims to avoid this */
         .sidebar-item-active {
-            background-color: #3B82F6; /* blue-500 */
+            background-color: #3B82F6; 
             color: white;
         }
     </style>
@@ -34,7 +33,6 @@
                         {{ Request::is('admin/reports') ? 'bg-blue-600' : '' }}">
                         <i class="fas fa-fw fa-chart-line mr-2"></i>Laporan Harian
                     </a>
-                    {{-- Tambahkan link menu lain di sini --}}
                 </nav>
             </div>
 
@@ -80,7 +78,6 @@
         </div>
         </div>
     <script>
-        // Basic dropdown toggle
         document.addEventListener('DOMContentLoaded', function () {
             const dropdownToggle = document.getElementById('navbarDropdown');
             const dropdownMenu = document.getElementById('userDropdown');
@@ -90,7 +87,6 @@
                     dropdownMenu.classList.toggle('hidden');
                 });
 
-                // Close dropdown if clicked outside
                 window.addEventListener('click', function(e) {
                     if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
                         dropdownMenu.classList.add('hidden');
@@ -98,31 +94,25 @@
                 });
             }
 
-            // Simple sidebar toggle for small screens (Tailwind doesn't have built-in sidebar)
             const sidebarToggle = document.getElementById('sidebarToggle');
             const sidebar = document.getElementById('sidebar-wrapper');
             const wrapper = document.getElementById('wrapper');
 
             sidebarToggle.addEventListener('click', function() {
-                sidebar.classList.toggle('hidden'); // Hide/show sidebar on small screens
-                // You might want more sophisticated responsive handling for sidebar
-                // For a simple example, just hide/show. For better UX, use transform/translate
+                sidebar.classList.toggle('hidden'); 
             });
 
-            // Initial hide for mobile view if preferred
-            const mediaQuery = window.matchMedia('(max-width: 768px)'); // md breakpoint
+            const mediaQuery = window.matchMedia('(max-width: 768px)'); 
             function handleMediaQueryChange(e) {
                 if (e.matches) {
-                    // On mobile, hide sidebar initially
                     sidebar.classList.add('hidden');
                 } else {
-                    // On desktop, ensure sidebar is visible
                     sidebar.classList.remove('hidden');
                 }
             }
 
-            handleMediaQueryChange(mediaQuery); // Run on initial load
-            mediaQuery.addListener(handleMediaQueryChange); // Listen for changes
+            handleMediaQueryChange(mediaQuery); 
+            mediaQuery.addListener(handleMediaQueryChange); 
         });
     </script>
 

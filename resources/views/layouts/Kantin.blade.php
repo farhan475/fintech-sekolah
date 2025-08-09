@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Kantin | Fintech Sekolah')</title>
-    {{-- Memuat Font Awesome untuk Ikon --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{-- Memuat Tailwind CSS melalui CDN untuk kemudahan. Ganti dengan @vite jika Anda menginstalnya secara lokal. --}}
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-sans flex min-h-screen">
 
     <div class="flex w-full">
-        <!-- Sidebar Navigasi -->
         <aside class="bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col justify-between">
             <div>
                 <div class="text-xl font-bold pb-4 border-b border-gray-700 mb-4">Fintech - Kantin</div>
@@ -25,7 +22,6 @@
                         {{ Request::is('kantin/barang*') ? 'bg-blue-600' : '' }}">
                         <i class="fas fa-fw fa-box-open mr-3"></i>Manajemen Barang
                     </a>
-                    {{-- Link untuk fitur berikutnya --}}
                     <a href="{{ route('kantin.transaksi.create') }}" class="flex items-center py-2 px-3 rounded-lg hover:bg-gray-700 transition-colors {{ Request::is('kantin/transaksi*') ? 'bg-blue-600' : '' }}">
                         <i class="fas fa-fw fa-cash-register mr-3"></i>Transaksi
                     </a>
@@ -35,7 +31,6 @@
                 </nav>
             </div>
 
-            <!-- Tombol Logout di Bawah -->
             <div class="mt-auto pt-4 border-t border-gray-700">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
@@ -46,10 +41,8 @@
             </div>
         </aside>
 
-        <!-- Konten Utama -->
         <div class="flex-1 flex flex-col">
             <header class="bg-white shadow-sm py-4 px-6 flex justify-end items-center">
-                {{-- Bisa ditambahkan menu dropdown user di sini jika perlu --}}
                 <div class="text-gray-600">
                     Selamat Datang, <span class="font-semibold">{{ Auth::user()->nama }}</span>
                 </div>

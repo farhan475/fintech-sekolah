@@ -9,8 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Untuk saat ini, kita hanya menampilkan view.
-        // Nanti bisa ditambahkan data ringkasan jika perlu.
         return view('bank.dashboard');
     }
 }

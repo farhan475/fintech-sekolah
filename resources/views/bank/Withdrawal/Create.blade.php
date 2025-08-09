@@ -1,9 +1,8 @@
-@extends('layouts.bank') {{-- Menggunakan layout khusus bank --}}
+@extends('layouts.bank')
 
 @section('content')
 <h1 class="text-3xl font-bold text-gray-800 mb-6">Form Penarikan Tunai</h1>
 
-{{-- Notifikasi untuk sukses atau error --}}
 @if (session('success'))
     <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
         <p>{{ session('success') }}</p>
@@ -19,7 +18,6 @@
     </div>
 @endif
 
-<!-- Form Pencarian Siswa -->
 <div class="bg-white shadow-md rounded-lg p-6 mb-6">
     <form action="{{ route('bank.withdrawal.create') }}" method="GET">
         <label for="nisn" class="block text-sm font-medium text-gray-700 mb-2">Cari Siswa Berdasarkan NISN:</label>
@@ -32,13 +30,12 @@
     </form>
 </div>
 
-<!-- Hasil Pencarian & Form Tarik Tunai (Tampil setelah pencarian) -->
 @if(request()->has('nisn'))
     <div class="bg-white shadow-md rounded-lg p-6">
         @if($siswa)
             <h2 class="text-2xl font-semibold mb-4">Detail Siswa</h2>
             <div class="mb-4 text-gray-700 space-y-1">
-                <p><strong>Nama:</strong> {{ $siswa->user->nama ?? 'N/A' }}</p> {{-- Mengambil nama dari relasi user --}}
+                <p><strong>Nama:</strong> {{ $siswa->user->nama ?? 'N/A' }}</p> 
                 <p><strong>NISN:</strong> {{ $siswa->nisn }}</p>
                 <p><strong>Kelas:</strong> {{ $siswa->kelas }}</p>
                 <p><strong>Saldo Saat Ini:</strong> <span class="font-bold text-lg text-green-600">Rp {{ number_format($siswa->saldo, 2, ',', '.') }}</span></p>
